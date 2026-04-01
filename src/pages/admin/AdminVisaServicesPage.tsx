@@ -14,7 +14,7 @@ const emptyItem = (): VisaServiceRecord => ({
   seoTitle: "",
   seoDescription: "",
   ctaEnabled: true,
-  status: "draft",
+  status: "published",
   updatedAt: new Date().toISOString(),
 });
 
@@ -50,6 +50,14 @@ export default function AdminVisaServicesPage() {
             <div>
               <label className="label-text mb-1 block">Pricing note</label>
               <input className="w-full rounded-lg border border-theme bg-surface-soft px-4 py-3" placeholder="Add any fee guidance or disclaimer." value={form.pricingNote ?? ""} onChange={(event) => setForm((current) => ({ ...current, pricingNote: event.target.value }))} />
+            </div>
+            <div>
+              <label className="label-text mb-1 block">Publish status</label>
+              <select className="w-full rounded-lg border border-theme bg-surface-soft px-4 py-3" value={form.status} onChange={(event) => setForm((current) => ({ ...current, status: event.target.value as VisaServiceRecord["status"] }))}>
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+                <option value="archived">Archived</option>
+              </select>
             </div>
             <button className="btn-accent" type="button" onClick={() => void saveVisaService({ ...form, updatedAt: new Date().toISOString() }).then(() => setForm(emptyItem()))}>Save visa service</button>
           </section>

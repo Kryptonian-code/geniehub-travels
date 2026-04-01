@@ -12,7 +12,7 @@ const emptyItem = (): StudyAbroadRecord => ({
   intakeInfo: "",
   content: "",
   ctaBanner: "",
-  status: "draft",
+  status: "published",
   updatedAt: new Date().toISOString(),
 });
 
@@ -48,6 +48,14 @@ export default function AdminStudyAbroadPage() {
             <div>
               <label className="label-text mb-1 block">Content body</label>
               <textarea className="w-full rounded-lg border border-theme bg-surface-soft px-4 py-3" rows={5} placeholder="Write the destination guidance shown on the public site." value={form.content} onChange={(event) => setForm((current) => ({ ...current, content: event.target.value }))} />
+            </div>
+            <div>
+              <label className="label-text mb-1 block">Publish status</label>
+              <select className="w-full rounded-lg border border-theme bg-surface-soft px-4 py-3" value={form.status} onChange={(event) => setForm((current) => ({ ...current, status: event.target.value as StudyAbroadRecord["status"] }))}>
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+                <option value="archived">Archived</option>
+              </select>
             </div>
             <button className="btn-accent" type="button" onClick={() => void saveStudyAbroadRecord({ ...form, updatedAt: new Date().toISOString() }).then(() => setForm(emptyItem()))}>Save study content</button>
           </section>
