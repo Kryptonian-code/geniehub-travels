@@ -10,7 +10,6 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
-deploy
 public_html
 .env
 .env.*
@@ -18,6 +17,8 @@ public_html
 *.local
 api/uploads/*
 !api/uploads/.gitkeep
+deploy/public_html/api/uploads/*
+!deploy/public_html/api/uploads/.gitkeep
 test-results
 playwright-report
 coverage
