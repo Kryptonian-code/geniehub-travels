@@ -1,19 +1,48 @@
-# GenieHub
+# GenieHub Travels
 
-GenieHub is a Vite + React + TypeScript travel operations platform with:
+GenieHub Travels is a Ghana-focused travel operations platform built for agencies handling consultations, visa support, study-abroad workflows, travel packages, documents, payments, and client communication from one system.
 
-- client signup and login
-- a full client dashboard for applications, documents, consultations, payments, messages, notifications, and profile settings
-- a full admin dashboard for operations, CMS management, and team workflows
-- XAMPP-ready PHP + MySQL integration with local demo fallback
-- stronger form validation, safer file uploads, and responsive workspace views
+It includes:
+
+- a public marketing website with dynamic CMS-backed content
+- a client workspace for applications, documents, consultations, payments, messages, notifications, and profile management
+- an admin workspace for operations, content management, staff workflows, and settings
+- a Vite + React + TypeScript frontend with a PHP + MySQL API designed for XAMPP
+- Firebase-ready client authentication with automatic local-auth fallback when Firebase env values are not configured
+
+## Highlights
+
+- admin-managed homepage sections, navigation, footer links, services, visa content, study-abroad content, packages, blogs, testimonials, FAQs, and settings
+- client and admin dashboards that share the same design system as the public site
+- safer uploads, password recovery, role-aware admin permissions, and audit-aware backend actions
+- dynamic public package, blog, and service detail flows instead of static placeholder pages
+- pagination on major dashboard and archive views to avoid endless scrolling
+
+## Stack
+
+- Frontend: React, TypeScript, Vite, Tailwind CSS, shadcn/ui
+- Backend: PHP, MySQL, Apache
+- Local runtime: XAMPP
+- Optional integrations: Firebase Auth, SendGrid, Twilio WhatsApp, Paystack, Google Analytics 4
+
+## Quick Start
+
+1. Copy `.env.example` to `.env`.
+2. Set `VITE_API_BASE_URL` to your Apache-served API path.
+3. Import `xampp/schema.sql` into MySQL.
+4. Make sure Apache can write to `api/uploads`.
+5. Start Apache and MySQL in XAMPP.
+6. Run `npm install`.
+7. Run `npm run dev`.
 
 ## Scripts
 
-- `npm run dev` starts the Vite development server.
-- `npm run build` creates a production build.
-- `npm run preview` previews the production build locally.
-- `npm run test` runs the Vitest test suite.
+- `npm run dev` starts the Vite development server
+- `npm run build` creates a production build
+- `npm run preview` previews the production build locally
+- `npm run test` runs the Vitest suite
+- `npm run lint` runs ESLint
+- `npx playwright test` runs the end-to-end browser suite
 
 ## Environment
 
@@ -34,7 +63,12 @@ Copy `.env.example` to `.env` and adjust the values for your local setup:
 
 Run `xampp/schema.sql` in phpMyAdmin or MySQL to create the required tables.
 
-If you are upgrading from an older local database, re-import the schema or add the new admin tables for content, operational metadata, staff roles, password recovery, and audit logging before testing the full admin module.
+If you are upgrading an older local database, re-import the schema or apply the relevant table and column additions before testing the latest admin and client flows. The schema includes:
+
+- users, profiles, auth recovery, and staff role metadata
+- client workspace records for documents, payments, consultations, checklist items, and messages
+- admin/CMS records for content blocks, visa services, study-abroad content, blogs, testimonials, FAQs, packages, and settings
+- operational records for leads, service requests, notifications, chats, and audit-aware updates
 
 ## Production Hardening Highlights
 
@@ -176,7 +210,8 @@ The admin dashboard extends the same GenieHub visual system as the public websit
 - users with role `admin` are redirected to `/admin`
 - users with role `client` are redirected to `/dashboard`
 - unauthenticated visits to admin routes are redirected back to login
-- local demo mode seeds `admin@geniehub.co / Admin123!` for workspace testing
+- local mode supports local auth when Firebase is not configured
+- live XAMPP mode expects real users in MySQL, including your admin and staff accounts
 
 ### Content And Settings Areas
 
@@ -227,6 +262,16 @@ The admin dashboard extends the same GenieHub visual system as the public websit
 6. Create or update an admin user in MySQL so you can access `/admin`.
 7. Start Apache and MySQL in XAMPP, then run `npm run dev` for the frontend.
 
+## Project Structure
+
+- `src/pages` contains public, client, and admin pages
+- `src/components` contains shared UI and workspace components
+- `src/contexts` contains app-wide dashboard and auth state
+- `src/lib` contains data access, API helpers, defaults, validation, and utilities
+- `api` contains the PHP backend and upload handling
+- `xampp/schema.sql` contains the MySQL schema for local deployment
+- `docs/operations.md` contains backup and operational guidance
+
 ## Deployment Readiness
 
 - `docs/operations.md` now includes backup and recovery guidance for database and upload files
@@ -246,3 +291,9 @@ The admin dashboard extends the same GenieHub visual system as the public websit
 - blog editing with slug cleanup, draft publishing, and delete support
 - public blog detail pages instead of placeholder "Read more" links
 - accessibility improvements such as skip links, stronger focus states, and better mobile spacing
+
+## Repository Notes
+
+- `.env`, uploads, build artifacts, and test artifacts are ignored in Git
+- `.env.example` is the safe template for collaborators
+- the live XAMPP project path used during local deployment is `C:\xampp\htdocs\ghanaian-dream-travel-main`
