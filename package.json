@@ -8,6 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
+    "prepare:infinityfree": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/prepare-infinityfree.ps1",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",

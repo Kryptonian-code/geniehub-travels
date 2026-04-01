@@ -10,6 +10,8 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+deploy
+public_html
 .env
 .env.*
 !.env.example
@@ -25,6 +27,10 @@ Thumbs.db
 .temp
 tmp
 *.pid
+*.zip
+*.7z
+*.tar
+*.gz
 
 # Editor directories and files
 .vscode/*
