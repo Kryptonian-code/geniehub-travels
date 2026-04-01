@@ -17,7 +17,7 @@ const emptyItem = (): TestimonialRecord => ({
   category: "visa",
   featured: false,
   displayOrder: 1,
-  status: "draft",
+  status: "approved",
   imageUrl: "",
   updatedAt: new Date().toISOString(),
 });
@@ -132,10 +132,10 @@ export default function AdminTestimonialsPage() {
             <div className="grid md:grid-cols-2 gap-4">
               <label className="inline-flex items-center gap-2 body-sm text-muted-green"><input type="checkbox" checked={form.featured} onChange={(event) => setForm((current) => ({ ...current, featured: event.target.checked }))} /> Featured testimonial</label>
               <div>
-                <label className="label-text mb-1 block">Status</label>
+                <label className="label-text mb-1 block">Approval status</label>
                 <select className="field-theme" value={form.status} onChange={(event) => setForm((current) => ({ ...current, status: event.target.value as TestimonialRecord["status"] }))}>
-                  <option value="draft">Draft</option>
                   <option value="approved">Approved</option>
+                  <option value="draft">Draft</option>
                   <option value="rejected">Rejected</option>
                 </select>
               </div>

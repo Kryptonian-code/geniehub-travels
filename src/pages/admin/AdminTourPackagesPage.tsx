@@ -28,7 +28,7 @@ const emptyItem = (): TourPackageRecord => ({
   imageUrl: "",
   visible: true,
   featured: false,
-  status: "draft",
+  status: "published",
   updatedAt: new Date().toISOString(),
 });
 
@@ -273,8 +273,8 @@ export default function AdminTourPackagesPage() {
             <div>
               <label className="label-text mb-1 block">Status</label>
               <select className="field-theme" value={form.status} onChange={(event) => setForm((current) => ({ ...current, status: event.target.value as TourPackageRecord["status"] }))}>
-                <option value="draft">Draft</option>
                 <option value="published">Published</option>
+                <option value="draft">Draft</option>
                 <option value="archived">Archived</option>
               </select>
             </div>
